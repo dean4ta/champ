@@ -29,7 +29,18 @@
         <rosparam file="$(arg ros_control_file)" command="load"/>
         <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
             joint_states_controller
-            joint_group_position_controller
+            joint_LF_HAA_effort_controller
+            joint_LF_HFE_effort_controller
+            joint_LF_KFE_effort_controller
+            joint_RF_HAA_effort_controller
+            joint_RF_HFE_effort_controller
+            joint_RF_KFE_effort_controller
+            joint_LH_HAA_effort_controller
+            joint_LH_HFE_effort_controller
+            joint_LH_KFE_effort_controller
+            joint_RH_HAA_effort_controller
+            joint_RH_HFE_effort_controller
+            joint_RH_KFE_effort_controller
             ">
         </node>
 
