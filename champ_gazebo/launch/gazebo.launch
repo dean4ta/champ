@@ -5,7 +5,7 @@
     <arg name="headless"           default="false"/>
     <arg name="paused"             default="false"/>
     <arg name="lite"               default="false" />
-    <arg name="champ_control"      default="true" />
+    <arg name="effort_control"     default="true" />
     <arg name="ros_control_file"   default="$(find champ_gazebo)/config/ros_control.yaml" />
     <arg name="gazebo_world"       default="$(find champ_gazebo)/worlds/outdoor.world" />
     <arg name="world_init_x"       default="0.0" />
@@ -28,14 +28,14 @@
         -x $(arg world_init_x) -y $(arg world_init_y) -z $(arg world_init_z) -Y $(arg world_init_heading)" />
 
         <rosparam file="$(arg ros_control_file)" command="load"/>
-        <group if="$(arg champ_control)">
+        <group unless="$(arg effort_control)">
             <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
                 joint_states_controller
                 joint_group_position_controller
                 ">
             </node>
         </group>
-        <group unless="$(arg champ_control)">
+        <group if="$(arg effort_control)">
             <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
                 joint_states_controller
                 joint_LF_HAA_effort_controller
